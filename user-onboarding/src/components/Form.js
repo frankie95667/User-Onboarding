@@ -14,7 +14,9 @@ import {
 const UserForm = ({errors, status, values, touched, addUser}) => {
 
     useEffect(() => {
-        status && addUser(status); 
+        if(status){
+          addUser(status); 
+        }
     }, [status])
 
   return (
@@ -22,21 +24,21 @@ const UserForm = ({errors, status, values, touched, addUser}) => {
       <Row>
         <FormGroup>
           <Label>Name:</Label>
-          <Input tag={Field} name="name" type="text" value={values.name} invalid={touched.name && errors.name}/>
+          <Field as={Input} name="name" invalid={touched.name && errors.name}/>
             <FormFeedback tooltip>{errors.name}</FormFeedback>
         </FormGroup>
       </Row>
       <Row>
         <FormGroup>
           <Label>Email:</Label>
-          <Input tag={Field} name="email" type="text" value={values.email} invalid={touched.email && errors.email} />
+          <Field as={Input}  name="email" invalid={touched.email && errors.email} />
           <FormFeedback tooltip>{errors.email}</FormFeedback>
         </FormGroup>
       </Row>
       <Row>
         <FormGroup>
           <Label>Password:</Label>
-          <Input tag={Field} name="password" type="password" value={values.password} invalid={touched.password && errors.password} />
+          <Field as={Input} name="password" type="password" invalid={touched.password && errors.password} />
           <FormFeedback tooltip>{errors.password}</FormFeedback>
         </FormGroup>
       </Row>
@@ -44,7 +46,7 @@ const UserForm = ({errors, status, values, touched, addUser}) => {
         <FormGroup check>
           <Label htmlFor="tos" check>
               {/* <Field id="tos" tag={Fied} name="tos" type="checkbox" /> */}
-            <Input id="tos" tag={Field} name="tos" type="checkbox" invalid={touched.tos && errors.tos} />
+            <Field id="tos" as={Input} name="tos" type="checkbox" invalid={touched.tos && errors.tos} />
             <FormFeedback tooltip>{errors.tos}</FormFeedback>
             Terms of Service:
           </Label>
