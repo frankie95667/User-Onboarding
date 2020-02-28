@@ -43,6 +43,27 @@ const UserForm = ({errors, status, values, touched, addUser}) => {
         </FormGroup>
       </Row>
       <Row>
+        <FormGroup>
+          <Label>Location:</Label>
+          <Field as={Input} name="location" invalid={touched.location && errors.location} />
+          <FormFeedback tooltip>{errors.location}</FormFeedback>
+        </FormGroup>
+      </Row>
+      <Row>
+        <FormGroup>
+          <Label>Favorite Color:</Label>
+          <Field as={Input} name="color" invalid={touched.color && errors.color} />
+          <FormFeedback tooltip>{errors.color}</FormFeedback>
+        </FormGroup>
+      </Row>
+      <Row>
+        <FormGroup>
+          <Label>Phone Number:</Label>
+          <Field as={Input} name="phone" type="phone" invalid={touched.phone && errors.phone} />
+          <FormFeedback tooltip>{errors.phone}</FormFeedback>
+        </FormGroup>
+      </Row>
+      <Row>
         <FormGroup check>
           <Label htmlFor="tos" check>
               {/* <Field id="tos" tag={Fied} name="tos" type="checkbox" /> */}
@@ -63,6 +84,9 @@ export default withFormik({
       name: "",
       email: "",
       password: "",
+      location: '',
+      color: '',
+      phone: '',
       tos: false
     };
   },
@@ -76,6 +100,9 @@ export default withFormik({
     password: Yup.string()
     .min(7, 'Password has to be more than 6 characters')
     .required('Password is required'),
+    location: Yup.string().min(5, 'Needs to be a minimum of 5 characters.'),
+    color: Yup.string(),
+    phone: Yup.string().length(10, 'Phone needs to be 10 characters (555)555-5555'),
     tos: Yup.bool()
         .test(
             'tos',
